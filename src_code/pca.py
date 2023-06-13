@@ -22,8 +22,5 @@ def pca_alg(X, n_components):
     # which will made our matrix U
     U = eigenvectors[:,:n_components]
 
-    # transform the data
-    #y = X.dot(U)
-
     return idx, U
 

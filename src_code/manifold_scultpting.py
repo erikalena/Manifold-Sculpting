@@ -1,9 +1,11 @@
 from tqdm import tqdm
 from pca import *
 from sklearn.decomposition import PCA
+from sklearn.metrics import pairwise_distances
 import queue    
 import numpy as np
 import copy
+
 
 
 def get_local_relationships(data, k=10):
@@ -13,9 +15,11 @@ def get_local_relationships(data, k=10):
     # matrix of distances
     distances = np.zeros((data.shape[0], data.shape[0]))
     
-    for i in range(data.shape[0]):
+    """ for i in range(data.shape[0]):
         for j in range(data.shape[0]):
-            distances[i, j] = np.linalg.norm(data[i, :] - data[j, :])
+            distances[i, j] = np.linalg.norm(data[i, :] - data[j, :]) """
+    
+    distances = pairwise_distances(data,  metric='euclidean')
 
     # keep track of average distance between each point and its neighbors
     avg_dist = 0

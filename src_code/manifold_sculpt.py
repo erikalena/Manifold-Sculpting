@@ -237,6 +237,6 @@ class ManifoldSculpting:
         
         # change the angle of the axes
         ax.view_init(10, -60)
-        filename = str(i)+ '_iterations.png'
+        filename = '/results/' + str(i)+ '_iterations.png'
         plt.savefig(filename)   # save the figure to file
         plt.close(fig)

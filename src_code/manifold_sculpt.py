@@ -1,7 +1,7 @@
-from tqdm import tqdm
-from pca import *
-from sklearn.decomposition import PCA
 from sklearn.metrics import pairwise_distances
+from matplotlib import pyplot as plt
+from dim_reduction_algorithms import pca_alg
+from utils import *
 import queue    
 import numpy as np
 import copy
@@ -59,16 +59,17 @@ class ManifoldSculpting:
 
         eta = copy.deepcopy(self.avg_dist0)
     
-        # third step: find principal directions through PCA
+        # third step: find principal directions 
         # and (optionally) align the data along the principal directions
-        idx, U = pca_alg(self.data, self.data.shape[1]) 
-        
+        cm = np.cov(self.data.T)
+        d = np.diag(cm)
+        idx = d.argsort()[::-1]
 
         if self.align:
+            idx, U = pca_alg(self.data, self.data.shape[1]) 
             x_pca = np.dot(self.data, U) 
         else:
             x_pca = copy.deepcopy(self.data) 
-
 
         self.dpres = idx[:self.n_components]
         self.dscal = idx[self.n_components:]
@@ -144,8 +145,8 @@ class ManifoldSculpting:
 
                 # if representations of intermediate steps are desired
                 # the following lines can be uncommented
-                # if self.data.shape[1] <= 3:
-                #    self.get_representation(x_pca, i)
+                if self.data.shape[1] <= 3:
+                    self.get_representation(x_pca, i)
                 
         self.performed_iter = i
 

@@ -124,9 +124,6 @@ For the experiments, they used $w_{ij} = 1$ if $n_{ij}$ has not yet been adjuste
 
 
 
-Why it is $O(|D|^3)$?
-
-Because the error surface is defined by the sum of the squared errors of each neighbor, and each neighbor is a function of the values in $D_{pres}$, which is a function of the values in $D$, which is a function of the original data.
 
 **Therefore, they used the simple hill-climbing technique of adjusting in each dimension in the direction that yields improvement.** (Instead of taking the derivative  wtr $\Delta_{pres}$, take the derivative with respect to each dimension in $\Delta_{pres}$ and update values of $\Delta_{pres}$ in that direction).
 

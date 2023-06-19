@@ -2,6 +2,7 @@
 from scipy.sparse import lil_matrix
 from scipy.sparse.csgraph import floyd_warshall
 from scipy.sparse.csgraph import connected_components
+from sklearn.metrics import pairwise_distances
 import numpy as np
 
 
@@ -78,7 +79,7 @@ def MDS(gram_matrix, K):
 
 
 
-def isomap_fun(data, n_neighbors):
+def isomap_alg(data, n_neighbors):
     # step 1 and 2
     # using euclidean distance find the k nearest neighbors and 
     # construct the neighborhood graph
@@ -129,17 +130,16 @@ def isomap_fun(data, n_neighbors):
 ## Diffusion Map
 #################
 
-def diffusion_map(data, n_components, n_neighbors, time=2, mode='distance'):
-    n = data.shape[0]
-    W = knn_graph(data, n_neighbors, mode).toarray()
-
-    sigma = 1
+def diffusion_map(data, n_components, time=2, mode='distance'):
+    #W = knn_graph(X, k, mode).toarray()
+    W = pairwise_distances(data, metric='euclidean')
+    
+    sigma = 2.5
     # affinity matrix
     A = np.exp(-W**2 / (2*sigma**2)) 
     P = A / np.sum(A, axis=1)  
 
-    pt = np.linalg.matrix_power(P, time)    
-    eigvals, eigvecs = np.linalg.eig(pt)
+    eigvals, eigvecs = np.linalg.eig(P)
 
     # sort eigenvalues and eigenvectors
     idx = np.argsort(eigvals)[::-1][1:]

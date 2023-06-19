@@ -1,4 +1,3 @@
-from sklearn.metrics import pairwise_distances
 from matplotlib import pyplot as plt
 from dim_reduction_algorithms import pca_alg
 from utils import *
@@ -46,13 +45,13 @@ class ManifoldSculpting:
         Function which implements the manifold sculpting algorithm.
         It takes the data as input and returns the embedding of the data, by performing the following steps:
         1. find the k nearest neighbors for each point and compute local relationships
-        2. find the directions to be preserved and those to be discarded through PCA and 
-            (optionally) align the data along the principal directions
+        2. choose the directions to be preserved and optionally align the data along the principal components obtained from PCA
         3. iteratively transform data and adjust relationships until stop criterion is met
         4. project the data in the new space
         '''
 
         self.data = data
+
         # find the k nearest neighbors for each point
         # compute the relationships between each point and its neighbors
         self.neighbors, self.dist0, self.colinear, self.angles0, self.avg_dist0 = get_local_relationships(data, self.k) 
@@ -60,7 +59,7 @@ class ManifoldSculpting:
         eta = copy.deepcopy(self.avg_dist0)
     
         # third step: find principal directions 
-        # and (optionally) align the data along the principal directions
+        # and optionally align the data along the principal directions
         cm = np.cov(self.data.T)
         d = np.diag(cm)
         idx = d.argsort()[::-1]
@@ -143,10 +142,10 @@ class ManifoldSculpting:
             if i % 10 == 0 and self.verbose:
                 print("Iteration: {}, change: {}".format(i, change))
 
-                # if representations of intermediate steps are desired
-                # the following lines can be uncommented
-                if self.data.shape[1] <= 3:
-                    self.get_representation(x_pca, i)
+                # if representations of intermediate steps is never desired,
+                # the following lines can be commented
+                #if self.data.shape[1] <= 3 and self.verbose:
+                #    self.get_representation(x_pca, i)
                 
         self.performed_iter = i
 
@@ -178,7 +177,7 @@ class ManifoldSculpting:
                 data[curr_idx, d] += eta
                 
                 new_error = self.compute_error(data, curr_idx, adj_data)
-                # empirically moving along one of the direction to be preserved
+                # empirically move along one of the direction to be preserved
                 # choosing the versus by evaluating how the error changes moving both up and down
                 if new_error > error:
                     data[curr_idx, d] -= 2*eta
@@ -209,7 +208,7 @@ class ManifoldSculpting:
             # distance between current point and point j
             new_dist = np.linalg.norm(data[curr_idx, :] - data[j, :])
             v1 = data[curr_idx, :] - data[j, :] # dist between curr point and point j
-            v2 = data[self.colinear[curr_idx,i], :] - data[j, :] # dist between colinear point with current one through point j and point j
+            v2 = data[self.colinear[curr_idx,i], :] - data[j, :] # dist between colinear point with current one, through point j, and point j
 
             if (np.linalg.norm(v1) * np.linalg.norm(v2)) == 0:
                 new_angle = 0

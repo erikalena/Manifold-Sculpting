@@ -42,7 +42,7 @@ def get_local_relationships(data, k=10):
                     v2 = data[m,:] - data[n,:]
                     angles[m] = np.arccos(np.dot(v1,v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
             
-            # choose the index of the angle which is neared to pi
+            # choose the index of the angle which is nearest to pi
             # because the angle between p-n and n-m is pi if the segment p-n is colinear with n-m
             colinear[i,j] = np.argmin(np.abs(angles - np.pi))
             theta[i,j] = angles[colinear[i,j]]

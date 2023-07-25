@@ -1,6 +1,6 @@
 # Manifold Sculpting
 
-This repository contains the code for the implementation of the method proposed by Michael Gashler in his paper: [Iterative Non-linear Dimensionality Reduction by Manifold Sculpting](https://proceedings.neurips.cc/paper/2007/hash/c06d06da9666a219db15cf575aff2824-Abstract.html). The method is exposed and compared with other manifold learning techniques, like Isomap, t-SNE, UMAP and LLE, in particular with respect to the results obtained on a simple Swiss Roll.
+This repository contains the code for the implementation of the method proposed by Michael Gashler in his paper: [Iterative Non-linear Dimensionality Reduction by Manifold Sculpting](https://proceedings.neurips.cc/paper/2007/hash/c06d06da9666a219db15cf575aff2824-Abstract.html). The method is implemented and compared with other manifold learning techniques, like Isomap, t-SNE, UMAP and LLE, in particular with respect to the results obtained on a simple Swiss Roll.
 
 ## Content 
 
@@ -11,7 +11,7 @@ All the code provided has been written using Python 3.9.5.
 ## Results
 
 The very nice thing about manifold sculpting algorithm is that we can observe what is going on, stopping our algorithm at whatever point we desire and looking at 
-partial results, in order to obtain a awesome unrolling of Swiss Roll.
+partial results, in order to obtain an awesome unrolling of Swiss Roll.
 
 
 ![](src_code/images/animation.gif)

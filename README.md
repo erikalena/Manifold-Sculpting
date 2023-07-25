@@ -1,6 +1,6 @@
 # Manifold Sculpting
 
-This repository contains the code for the implementation of the method proposed by Michael Gashler in his paper: [Iterative Non-linear Dimensionality Reduction by Manifold Sculpting] (https://proceedings.neurips.cc/paper/2007/hash/c06d06da9666a219db15cf575aff2824-Abstract.html). The method is exposed and compared with other manifold learning techniques, like Isomap, t-SNE, UMAP and LLE, in particular with respect to the results obtained on a simple Swiss Roll.
+This repository contains the code for the implementation of the method proposed by Michael Gashler in his paper: [Iterative Non-linear Dimensionality Reduction by Manifold Sculpting](https://proceedings.neurips.cc/paper/2007/hash/c06d06da9666a219db15cf575aff2824-Abstract.html). The method is exposed and compared with other manifold learning techniques, like Isomap, t-SNE, UMAP and LLE, in particular with respect to the results obtained on a simple Swiss Roll.
 
 ## Content 
 

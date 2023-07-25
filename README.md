@@ -11,7 +11,7 @@ All the code provided has been written using Python 3.9.5.
 ## Results
 
 The very nice thing about manifold sculpting algorithm is that we can observe what is going on, stopping our algorithm at whatever point we desire and looking at 
-partial results, in order to obtain an awesome unrolling of Swiss Roll.
+partial results, in order to obtain an awesome unrolling of the Swiss Roll.
 
 
 ![](src_code/images/animation.gif)
